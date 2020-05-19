@@ -50,10 +50,8 @@ def fetchData():
         return
     url = (f'https://opentdb.com/api.php?amount=1&category={selectCategory(inputCategory)}&difficutly={selectDifficulty(inputDifficulty)}')
     res =requests.get(url).json()
-    #  print(url)
     print('Question: ', res['results'][0]['question'])
     print('------------------------')
-    #  print(res['results'])
 
     correct_answer = res['results'][0]['correct_answer']
     incorrect_answers = res['results'][0]['incorrect_answers']
