@@ -48,7 +48,7 @@ def fetchData():
             inputDifficulty = input('Input your difficutly number: ')
     except:
         return
-    url = (f'https://opentdb.com/api.php?amount=1&category={selectCategory(inputCategory)}&difficutly={selectDifficulty(inputDifficulty)}')
+    url = (f'https://opentdb.com/api.php?amount=1&type=multiple&category={selectCategory(inputCategory)}&difficutly={selectDifficulty(inputDifficulty)}')
     res =requests.get(url).json()
     print('Question: ', res['results'][0]['question'])
     print('-------------------------')
@@ -57,19 +57,20 @@ def fetchData():
     incorrect_answers = res['results'][0]['incorrect_answers']
     incorrect_answers.append(str(correct_answer))
 
-    count = 1
     for i in range(len(incorrect_answers)):
         print(f'{i + 1}: {str(incorrect_answers[i])} ')
 
     inputAnswer = input('Input your number answer: ')
 
-    if inputAnswer == correct_answer:
-        print('you right')
+    if inputAnswer.strip() == correct_answer:
+        print('Correct answer')
+    else:
+        print('Incorrect answer')
     
 def __init__():
     while True:
         fetchData()
-        next = input("Do you want to continue? y/n \n")
+        next = input("Do you want to continue? yes/no \n")
         if next == 'y':
             print('---------------')
             return False
@@ -77,6 +78,7 @@ def __init__():
             print('Bye')
             return True
         else:
-            next = input("Do you want to continue? y/n \n")
+            print("Invalid answer")
+            next = input("Do you want to continue? yes/no \n")
 
 __init__()
